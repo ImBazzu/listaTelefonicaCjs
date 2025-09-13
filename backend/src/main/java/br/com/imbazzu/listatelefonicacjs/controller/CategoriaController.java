@@ -17,7 +17,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequiredArgsConstructor
 public class CategoriaController {
 
+    //Onde acontece a logica
     private final CategoriaService service;
+
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")

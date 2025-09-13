@@ -20,7 +20,8 @@ import java.util.Collection;
 @Getter
 @EqualsAndHashCode(of = "id")
 public class Usuario implements UserDetails {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String login;
@@ -29,7 +30,6 @@ public class Usuario implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private RoleUsuarioEnum role;
-
 
     public Usuario(String login, String senha, String role) {
         this.login = login;
@@ -40,11 +40,11 @@ public class Usuario implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         var authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_"+ RoleUsuarioEnum.USUARIO.getRole()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + RoleUsuarioEnum.USUARIO.getRole()));
 
-        if(this.role == RoleUsuarioEnum.ADMIN){
-            authorities.add(new SimpleGrantedAuthority("ROLE_"+ RoleUsuarioEnum.ADMIN.getRole()));
-}
+        if (this.role == RoleUsuarioEnum.ADMIN) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + RoleUsuarioEnum.ADMIN.getRole()));
+        }
         return authorities;
     }
 

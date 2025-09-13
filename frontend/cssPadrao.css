@@ -1,0 +1,22 @@
+/* Variáveis de cores e fontes */
+:root {
+    --cor-fundo: #0568A6;
+    --cor-fundo02: #BFA98E;
+    --cor-botao-hover: #034f7d;
+    --cor-input-bg: #ffffff;
+    --cor-texto: #333333;
+    --sombra: rgba(0, 0, 0, 0.2);
+    --font-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-principal);
+}
+
+body {
+    background-color: var(--cor-fundo02);
+}
