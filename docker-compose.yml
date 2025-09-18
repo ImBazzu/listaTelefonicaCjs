@@ -1,0 +1,55 @@
+services:
+
+    mysql:
+        image: mysql:8
+        container_name: mysql_lista_telefonica
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: lista_telefonica
+            MYSQL_USER: app_user
+            MYSQL_PASSWORD: senha123
+        volumes:
+            - mysql_data:/var/lib/mysql
+        networks:
+            - app-network # Adiciona o MySQL à mesma rede dos outros serviços
+        healthcheck:
+            test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uapp_user", "-psenha123" ]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+    backend:
+        build: ./backend
+        container_name: backend_lista_telefonica
+        environment:
+            DB_HOST: mysql # O nome do serviço 'mysql' no Docker Compose é o hostname dentro da rede
+            DB_PORT: 3306
+            DB_BANCO: lista_telefonica
+            DB_USUARIO: app_user
+            DB_SENHA: senha123
+            JWT_SECRETS: xjS7od3KkilSGkGmyxNUFyuf6+SgqZKJeEmmscs4DHmfzdDo+oLxYQiVWUGaZTWS
+            JWT_ASSINATURA: lista_telefonica_cjs
+        depends_on:
+            mysql:
+                condition: service_healthy
+        ports:
+            - "8080:8080"
+        networks:
+            - app-network
+
+    frontend:
+        build: ./frontend # onde está o Dockerfile com "serve -l 5500 ."
+        container_name: frontend_lista_telefonica
+        ports:
+            - "5500:5500"
+        networks:
+            - app-network
+        depends_on:
+            - backend
+
+volumes:
+    mysql_data:
+
+
+networks:
+    app-network:
+        driver: bridge
