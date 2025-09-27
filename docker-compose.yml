@@ -19,7 +19,7 @@ services:
       timeout: 5s
       retries: 5
 
-  backend:
+  backendListaTelefonica:
     build: ./backend
     container_name: backend_lista_telefonica
     environment:
@@ -35,22 +35,14 @@ services:
         condition: service_healthy
     networks:
       - app-network
-    # Não expomos a porta 8080 no host para evitar conflito
-    # O frontend acessa o backend via app-network internamente
+    # Não expomos porta para o host. Frontend acessa internamente via Docker.
 
   frontend:
     build: ./frontend
     container_name: frontend_lista_telefonica
     ports:
-      - "8081:5500"  # Porta externa no host diferente da 80/8080
+      - "8081:5500"  # Acessível no host em http://localhost:8081
     networks:
       - app-network
     depends_on:
-      - backend
-
-volumes:
-  mysql_data:
-
-networks:
-  app-network:
-    driver: bridge
+      - backendListaTelefonica
