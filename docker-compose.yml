@@ -35,14 +35,20 @@ services:
         condition: service_healthy
     networks:
       - app-network
-    # Não expomos porta para o host. Frontend acessa internamente via Docker.
 
   frontend:
     build: ./frontend
     container_name: frontend_lista_telefonica
     ports:
-      - "8081:5500"  # Acessível no host em http://localhost:8081
+      - "8081:5500"
     networks:
       - app-network
     depends_on:
       - backendlistatelefonica
+
+volumes:
+  mysql_data:   # <-- declaração do volume
+
+networks:
+  app-network:
+    driver: bridge
