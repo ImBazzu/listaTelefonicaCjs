@@ -1,6 +1,6 @@
 async function loginUsuario(login, senha) {
   try {
-    const response = await fetch("http://localhost:8080/auth/login", {
+    const response = await fetch("http://backendListaTelefonica:8080/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
