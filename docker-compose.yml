@@ -45,4 +45,4 @@ services:
     networks:
       - app-network
     depends_on:
-      - backendListaTelefonica
+      - backendlistatelefonica
