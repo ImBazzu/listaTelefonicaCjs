@@ -68,7 +68,7 @@ public class SegurancaConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Defina os domínios permitidos
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500"));
+        configuration.setAllowedOriginPatterns(List.of("*"));
         // Métodos permitidos
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // Headers permitidos, incluindo Authorization para JWT

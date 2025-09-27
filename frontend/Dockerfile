@@ -10,8 +10,8 @@ COPY . .
 # Instala o "serve"
 RUN npm install -g serve
 
-# Expõe a porta 5500
-EXPOSE 5500
+# Expõe a porta 80
+EXPOSE 80
 
 # Comando que roda o servidor
-CMD ["serve", "-l", "5500", "."]
+CMD ["serve", "-l", "80", "."]
