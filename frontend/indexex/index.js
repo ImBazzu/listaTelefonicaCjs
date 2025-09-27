@@ -47,7 +47,7 @@ async function fetchWithAuth(url, options = {}) {
 // ---------------------------
 async function carregarEstabelecimentos(textoBusca = "") {
   try {
-    const data = await fetchWithAuth("http://localhost:8080/empresa/buscar?texto=" + encodeURIComponent(textoBusca), {
+    const data = await fetchWithAuth("http://backendListaTelefonica:8080/empresa/buscar?texto=" + encodeURIComponent(textoBusca), {
       method: "GET"
     });
 
