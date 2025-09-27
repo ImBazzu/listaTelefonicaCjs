@@ -19,7 +19,7 @@ services:
       timeout: 5s
       retries: 5
 
-  backendListaTelefonica:
+  backendlistatelefonica:
     build: ./backend
     container_name: backend_lista_telefonica
     environment:
